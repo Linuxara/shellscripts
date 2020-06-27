@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#To clear all logs in Logpath
+
+URoot=$1
+
+find $URoot -name '*.log' -o -name '*.log.*' -o -name '*.gz' -o -name '*.swp' | xargs sudo rm -f
+

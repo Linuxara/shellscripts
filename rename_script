@@ -1,0 +1,34 @@
+#!/bin/bash
+
+cd ara_new_test
+
+for file in *;
+do echo " $file"; 
+
+var1=${file:0:10};
+echo "Before trimming: $var1";
+
+mv $file $var1;
+
+echo "Updated files $file"; 
+
+var2=echo $file| wc -c;
+
+echo "After trimming: $var2";
+ done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#do echo "$file";
+#To remove first 5 characters of a file name

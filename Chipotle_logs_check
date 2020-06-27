@@ -1,0 +1,23 @@
+#!/bin/bash
+shopt -s expand_aliases
+
+
+function listlogs
+{
+tail -f /var/log/tomcat/chipotle-ordering-app-INFO.log
+}
+function 1000logs
+{
+tail -1000 /var/log/tomcat/chipotle-ordering-app-INFO.log
+}
+
+case $1 in
+"1000logs")
+	1000logs
+;;
+"listlogs")
+	listlogs
+;;
+esac
+
+

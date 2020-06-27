@@ -1,0 +1,10 @@
+#!/bin/bash
+#Author:Aradhana K
+
+echo $pwd
+
+while [ 1 -eq 1 ]
+do
+	1>&1>>outputfile-test
+done
+

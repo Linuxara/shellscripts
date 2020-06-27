@@ -1,0 +1,116 @@
+#!/bin/bash
+
+#To grep expection or error in log
+
+zipdir=/var/log/process-engine-standalone-aradhana
+
+zipedf=info.log
+
+ecode=$?
+
+arg_num=$#
+
+echo "No of argument $arg_num"
+
+cd $zipdir
+
+case $# in
+
+0)
+echo "Please enter function name,string/filename to proceed"
+;;
+1)
+#echo	"You have entered only one argument: $1 "
+;;
+2)
+#echo "grep through subdirectories "
+;;
+3)
+
+#There are two scenarios here: 
+#TC-1 
+#When user doesn't enter file name, app bydefault grep from info.log
+#TC-2
+#Whn use provides file name, app overrides at $3 
+
+zipfile=$3
+echo "Filename by user:$zipfile"
+;;
+
+esac
+
+function errorlogs
+{
+	if [ $arg_num -eq 1 ]
+		then
+			echo "Please enter the required  string followed by file name "		
+			echo   "You have entered only one argument: $1 "
+
+			elif [ $arg_num -eq 2 ]
+			then
+			grep -nir $1 	
+			echo "Searching from sub directories: $1" 
+
+			elif [ $arg_num -eq 3 ]
+			then	
+			grep -nir $1
+			echo "Filename by user: $1 : $zipfile" 
+			echo "Exit code: $ecode"
+
+			elif [ $arg_num -gt 3 ]
+			then
+			echo "INVALID argument"
+	else
+		echo "Please enter the required  string followed by file name "
+			fi
+}
+
+date=$2
+function unzipold
+{
+echo "Date: $date"
+	sudo gunzip  $zipedf.$date.gz 
+
+		ls -lrt  $zipedf.$date		
+		echo "Exit code: $ecode"
+}
+
+case $1 in
+"errorlogs")
+#echo "Don't miss to enter arguments: Search string  and filename"
+errorlogs $2
+
+;;
+
+"unzipold")
+echo "Enter the date in proper format: Eg:2020-06-09"
+unzipold $2
+;;
+*)
+echo "Your functionality may be implemented in future. Please contact Product Owner"
+esac
+
+#--help implementation
+
+if [ $1 == "--help"   ]
+then
+	echo "Conditional operators and arguments usage is the core motive of the shell script  "
+	echo "Exit status:
+ 0  if OK,
+ 1  if minor problems (e.g., cannot access subdirectory),
+ 2  if serious trouble (e.g., cannot access command-line argument)."
+
+echo "For Feedback reach out aradhanakhadanga21@gmail.com"
+
+
+
+
+
+
+
+
+
+
+
+
+
